@@ -721,7 +721,8 @@ app.post('/tagData', async (req, res) => {
 
   // Fetch student information from the MySQL server
   try {
-    const response = await axios.get('https://macts-backend-webapp-production-0bd2.up.railway.app/studentInfo');
+    // const response = await axios.get('https://macts-backend-webapp-production-0bd2.up.railway.app/studentInfo');
+    const response = await axios.get('https://macts-backend-webapp.onrender.com/studentInfo');
     const students = response.data;
     const formattedDate = moment().tz('Asia/Manila').format('M/D/YYYY, h:mm:ss A'); // Format the date in Philippine Time
 
@@ -744,7 +745,8 @@ app.post('/tagData', async (req, res) => {
       };
 
       // Perform the database insert or update
-      const historyResponse = await axios.post('https://macts-backend-mobile-app-production.up.railway.app/library_history', libraryHistory);
+      // const historyResponse = await axios.post('https://macts-backend-mobile-app-production.up.railway.app/library_history', libraryHistory);
+      const historyResponse = await axios.post('https://macts-backend-mobile-app.onrender.com/library_history', libraryHistory);
       console.log(`Tap status: ${historyResponse.data.tapStatus}`); // Log the tap status ("In" or "Out")
 
       io.emit('tagData', { user_id: matchedStudent.user_id, tagData, tapStatus: historyResponse.data.tapStatus, excessiveTap: false });
